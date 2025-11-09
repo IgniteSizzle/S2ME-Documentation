@@ -1,0 +1,231 @@
+{% extends "template.html" %}
+
+{% block headTitle %}Добро пожаловать{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyNavbar %}
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Якоря</a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item" href="#aboutJavaME">Что такое Java ME</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava">Основы синтаксиса Java</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_1">1. Классы и объекты</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_2">2. Точки входа в программу</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_3">3. Работа с интерфейсом</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_4">4. Переменные и типы данных</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_5">5. Управляющие конструкции</a></li>
+			<li><a class="dropdown-item" href="#baseSyntaxJava_6">6. Методы и классы</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#pnm">Преимущества и недостатки JavaME</a></li>
+		</ul>
+	</li>
+	<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Github</a></li>
+{% endblock %}
+{% block bodyMain %}
+	<div class="text-center" id="welcome">
+		<p class="h1">Добро пожаловать</p>
+		<p>
+			В этом разделе мы сделаем первые шаги в мире Java ME (Micro Edition) — узнаем, что это за платформа, зачем она нужна, как выглядит базовый синтаксис Java и в чём особенности разработки для устройств с ограниченными ресурсами.
+			<br><br>
+			Наша цель — понять суть Java ME и получить общее представление о том, как пишутся и работают простейшие приложения.
+		</p>
+	</div>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="aboutJavaME">Что такое Java ME</p>
+	<p>
+		<b>Java ME (Micro Edition)</b> — это облегчённая версия платформы Java, предназначенная для запуска программ на устройствах с невысокой производительностью и ограниченным объёмом памяти.<br>
+		Ранее Java ME широко использовалась для создания приложений под кнопочные телефоны (например, игры и утилиты формата <span class="badge bg-secondary">.jar</span>), её можно было встретить в:
+	</p>
+	<ul>
+		<li>Мобильных телефонах</li>
+		<li>Смарт-карты и RFID-устройства</li>
+		<li>Планшеты и КПК</li>
+		<li>Мобильные операционные системы</li>
+		<li>Мобильные игровые приставки и мультимедийные устройства</li>
+		<li>Терминалы для бизнеса и точек продаж</li>
+	</ul>
+	<p>
+		Приложения Java ME называются <b>MIDlet</b> (от <em>Mobile Information Device applet</em>). Они выполняются внутри специальной виртуальной машины — <b>KVM (Kilo Virtual Machine)</b>, которая поддерживает лишь часть стандартных возможностей Java.
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="baseSyntaxJava">Основы синтаксиса Java</p>
+	<p>
+		Java ME основана на языке <b>Java</b>, поэтому её синтаксис почти полностью совпадает с обычной Java SE. Однако в Java ME доступны не все стандартные библиотеки, а возможности интерфейса, сети и файловой системы ограничены.<br>
+		Тем не менее, базовые принципы те же:
+	</p>
+	
+	<p class="h3" id="baseSyntaxJava_1">1. Классы и объекты</p>
+	<p>
+		Java — это объектно-ориентированный язык. Всё состоит из классов и объектов.<br>
+		Каждое приложение Java ME содержит главный класс MIDlet, который наследуется от <span class="badge bg-secondary">javax.microedition.midlet.MIDlet</span>.
+	</p>
+	<pre><code class="language-java">
+		public class HelloWorldMIDlet extends MIDlet {
+			// код приложения
+		}
+	</code></pre>
+	
+	<p class="h3" id="baseSyntaxJava_2">2. Точки входа в программу</p>
+	<p>
+		В отличие от обычной Java-программы (где используется <span class="badge bg-secondary">public static void main()</span>), MIDlet управляется системой.<br>
+		В нём есть три ключевых метода жизненного цикла:
+	</p>
+	<pre><code class="language-java">
+		public void startApp()    // вызывается при запуске
+		public void pauseApp()    // вызывается при сворачивании/приостановке
+		public void destroyApp(boolean unconditional) // вызывается при завершении
+	</code></pre>
+	
+	<p class="h3" id="baseSyntaxJava_3">3. Работа с интерфейсом</p>
+	<p>
+		Для вывода информации на экран Java ME использует пакеты <span class="badge bg-secondary">javax.microedition.lcdui.*</span>.
+		<br><br>
+		Пример простейшего интерфейса:
+	</p>
+	<pre><code class="language-java">
+		import javax.microedition.lcdui.*;
+		import javax.microedition.midlet.*;
+
+		public class HelloWorldMIDlet extends MIDlet {
+			private Display display;
+
+			public HelloWorldMIDlet() {
+				display = Display.getDisplay(this);
+			}
+
+			public void startApp() {
+				Form form = new Form("Привет, Java ME!");
+				form.append("Добро пожаловать в мир мобильной Java!");
+				display.setCurrent(form);
+			}
+
+			public void pauseApp() {}
+			public void destroyApp(boolean unconditional) {}
+		}
+	</code></pre>
+	
+	<p class="h3" id="baseSyntaxJava_4">4. Переменные и типы данных</p>
+	<p>
+		Java ME поддерживает все базовые типы данных Java:
+	</p>
+	<table class="table table-sm table-bordered">
+		<thead>
+            <tr>
+				<th scope="col">#</th>
+				<th scope="col">Тип</th>
+				<th scope="col">Описание</th>
+				<th scope="col">Пример</th>
+            </tr>
+		</thead>
+		<tbody>
+            <tr>
+				<th scope="row">1</th>
+				<td>byte</td>
+				<td>8-битное целое число со знаком</td>
+				<td><code class="language-java">byte b = 127;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">2</th>
+				<td>short</td>
+				<td>16-битное целое число со знаком</td>
+				<td><code class="language-java">short s = 32767;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">3</th>
+				<td>int</td>
+				<td>32-битное целое число со знаком</td>
+				<td><code class="language-java">int i = 2147483647;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">4</th>
+				<td>long</td>
+				<td>64-битное целое число со знаком</td>
+				<td><code class="language-java">long l = 9223372036854775807L;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">5</th>
+				<td>float</td>
+				<td>32-битное число с плавающей точкой</td>
+				<td><code class="language-java">float f = 3.14f;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">6</th>
+				<td>double</td>
+				<td>64-битное число с плавающей точкой</td>
+				<td><code class="language-java">double d = 3.14159;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">7</th>
+				<td>char</td>
+				<td>16-битный символ Unicode</td>
+				<td><code class="language-java">char c = 'A';</code></td>
+            </tr>
+            <tr>
+				<th scope="row">8</th>
+				<td>boolean</td>
+				<td>логический тип, принимает значения true или false</td>
+				<td><code class="language-java">boolean flag = true;</code></td>
+            </tr>
+            <tr>
+				<th scope="row">9</th>
+				<td>String</td>
+				<td>последовательность символов (объект)</td>
+				<td><code class="language-java">String str = "Привет";</code></td>
+            </tr>
+		</tbody>
+	</table>
+	
+	<p class="h3" id="baseSyntaxJava_5">5. Управляющие конструкции</p>
+	<p>
+		Java ME полностью поддерживает стандартные конструкции Java:
+	</p>
+	<pre><code class="language-java">
+		if (x > 0) {
+			System.out.println("Положительное число");
+		} else {
+			System.out.println("Отрицательное число");
+		}
+
+		for (int i = 0; i < 5; i++) {
+			System.out.println("i = " + i);
+		}
+	</code></pre>
+	
+	<p class="h3" id="baseSyntaxJava_6">6. Методы и классы</p>
+	<p>
+		Методы объявляются внутри классов. Например:
+	</p>
+	<pre><code class="language-java">
+		public class MathUtils {
+			public int add(int a, int b) {
+				return a + b;
+			}
+		}
+	</code></pre>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="pnm">Преимущества и недостатки JavaME</p>
+	<p>
+		Не стоит забывать что JavaME имеет положительные и отрицательные характеры.<br>
+		Ниже мы расмотрим все положительные и отрицательные стороны разработки на JavaME!
+	</p><br>
+	<p class="h3">Преимущества Java ME:</p>
+	<ul>
+		<li><b>Кроссплатформенность</b> — программы могут работать на разных устройствах без изменений.</li>
+		<li><b>Безопасность</b> — изолированная среда выполнения (песочница).</li>
+		<li><b>Небольшой размер</b> — приложения занимают мало памяти.</li>
+		<li><b>Строгий синтаксис и стабильность</b>, как у полной Java.</li>
+	</ul>
+	<p class="h3">Недостатки Java ME:</p>
+	<ul>
+		<li>Ограниченный набор API и библиотек.</li>
+		<li>Отсутствие современных инструментов и фреймворков.</li>
+		<li>Трудности с совместимостью разных устройств и версий профилей.</li>
+	</ul>
+{% endblock %}

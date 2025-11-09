@@ -1,0 +1,255 @@
+{% extends "template.html" %}
+
+{% block headTitle %}Подготовка и установка{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyNavbar %}
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Якоря</a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item" href="#requirements">Системные требования</a></li>
+			<li><a class="dropdown-item" href="#requirements_1">1. Java Development Kit 7 (JDK 7)</a></li>
+			<li><a class="dropdown-item" href="#requirements_2">2. Sun Java Wireless Tool Kit (SJWTK)</a></li>
+			<li><a class="dropdown-item" href="#requirements_3">3. Oracle JavaME SDK 3.4</a></li>
+			<li><a class="dropdown-item" href="#requirements_4">4. NetBeans IDE 7.3</a></li>
+			<li><a class="dropdown-item" href="#requirements_5">5. Общая минимальная конфигурация</a></li>
+			<li><a class="dropdown-item" href="#requirements_6">6. Выбор системы для разработки</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#requirements_6_1">--- Windows (рекомендуется)</a></li>
+			<li><a class="dropdown-item" href="#requirements_6_2">--- Linux</a></li>
+			<li><a class="dropdown-item" href="#requirements_6_3">--- MacOS</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#install_1">Подготовка</a></li>
+			<li><a class="dropdown-item" href="#install_2">Установка</a></li>
+			<li><a class="dropdown-item" href="#install_3">Настройка</a></li>
+		</ul>
+	</li>
+{% endblock %}
+{% block bodyMain %}
+	<div class="text-center" id="welcome">
+		<p class="h1" id="welcome">Подготовка и установка</p>
+		<p>
+			Данный раздел будет посвящён подготовке и установке IDE и библиотек на ваш компьютер. Так же нашей задачей будет настроить IDE для начала разработки вашего первого приложения или игры!
+		</p>
+	</div>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="requirements">Системные требования</p>
+	<p>
+		Перед подготовкой давайте обговорим минимальные системные требования для каждого нужного приложения. Так же мы посмотрим на общие системные требования вашего пк, что бы все приложения запустились!<br><br>
+	</p>
+	<p class="h3" id="requirements_1">1. Java Development Kit 7 (JDK 7)</p>
+	<p>
+		Набор инструментов для создания, компиляции и выполнения Java-программ.<br>
+		Содержит компилятор (<span class="badge bg-secondary">javac</span>), виртуальную машину Java (JVM), стандартные библиотеки и отладочные утилиты.<br>
+	</p>
+	<b>Минимальные системные требования:</b>
+	<ul>
+		<li><b>ОС: </b>Windows XP SP3 / Vista / 7, Linux, macOS 10.7+</li>
+		<li><b>Процессор: </b>1 ГГц</li>
+		<li><b>ОЗУ: </b>512 МБ (1 ГБ рекомендуется)</li>
+		<li><b>Место на диске: </b>~300 МБ</li>
+		<li><b>Разрешение экрана: </b>1024×768</li>
+	</ul><br>
+	
+	<p class="h3" id="requirements_2">2. Sun Java Wireless Tool Kit (SJWTK)</p>
+	<p>
+		Среда для разработки и тестирования мобильных приложений Java ME (MIDlet’ов).<br>
+		Позволяет компилировать, запускать и отлаживать программы в эмуляторе мобильного устройства.<br>
+	</p>
+	<b>Минимальные системные требования:</b>
+	<ul>
+		<li><b>ОС: </b>Windows XP / Vista / 7</li>
+		<li><b>Процессор: </b>1 ГГц</li>
+		<li><b>ОЗУ: </b>512 МБ</li>
+		<li><b>Место на диске: </b>~200 МБ</li>
+		<li><b>Разрешение экрана: </b>1024×768</li>
+	</ul><br>
+	
+	<p class="h3" id="requirements_3">3. Oracle JavaME SDK 3.4</p>
+	<p>
+		Современная платформа для разработки Java ME-приложений.<br>
+		Объединяет функции Wireless Toolkit, добавляя улучшенные эмуляторы, отладку и интеграцию с IDE (например, NetBeans).<br>
+		Поддерживает профили CLDC, CDC и MEEP.<br>
+	</p>
+	<b>Минимальные системные требования:</b>
+	<ul>
+		<li><b>ОС: </b>Windows 7 / 8 (32/64-бит)</li>
+		<li><b>Процессор: </b>1 ГГц или выше</li>
+		<li><b>ОЗУ: </b>1 ГБ (2 ГБ рекомендуется)</li>
+		<li><b>Место на диске: </b>~400 МБ</li>
+		<li><b>Разрешение экрана: </b>1024×768</li>
+	</ul><br>
+	
+	<p class="h3" id="requirements_4">4. NetBeans IDE 7.3</p>
+	<p>
+		Интегрированная среда разработки (IDE) для Java SE, Java EE и Java ME.<br>
+		Позволяет писать, компилировать, отлаживать и визуально проектировать приложения.<br>
+		Поддерживает плагины для Java ME SDK.<br>
+	</p>
+	<b>Минимальные системные требования:</b>
+	<ul>
+		<li><b>ОС: </b>Windows XP / Vista / 7 / 8, Linux, macOS</li>
+		<li><b>Процессор: </b>1 ГГц</li>
+		<li><b>ОЗУ: </b>512 МБ минимум (1–2 ГБ рекомендуется)</li>
+		<li><b>Место на диске: </b>~700 МБ</li>
+		<li><b>Разрешение экрана: </b>1024×768</li>
+	</ul><br>
+	
+	<p class="h3" id="requirements_5">5. Общая минимальная конфигурация</p>
+	<table class="table table-sm table-bordered">
+		<thead>
+            <tr>
+				<th scope="col">#</th>
+				<th scope="col">Компонент</th>
+				<th scope="col">Минимум</th>
+            </tr>
+		</thead>
+		<tbody>
+            <tr>
+				<th scope="row">1</th>
+				<td>ОС</td>
+				<td>Windows 7 (32/64-бит)</td>
+            </tr>
+            <tr>
+				<th scope="row">2</th>
+				<td>Процессор</td>
+				<td>1 ГГц (2 ядра рекомендуется)</td>
+            </tr>
+            <tr>
+				<th scope="row">3</th>
+				<td>ОЗУ</td>
+				<td>1 ГБ (лучше 2 ГБ+)</td>
+            </tr>
+            <tr>
+				<th scope="row">4</th>
+				<td>Место на диске</td>
+				<td>~2 ГБ свободного места</td>
+            </tr>
+            <tr>
+				<th scope="row">5</th>
+				<td>Разрешение экрана</td>
+				<td>1024×768</td>
+            </tr>
+		</tbody>
+	</table><br>
+	
+	<p class="h3" id="requirements_6">6. Выбор системы для разработки</p>
+	<p>
+		<p class="h4" id="requirements_6_1">* Windows (рекомендуется)</p>
+		Все перечисленные инструменты (особенно Java ME SDK 3.4 и Wireless Toolkit) изначально разрабатывались под Windows, имеют полную совместимость, простую установку и встроенные графические эмуляторы.<br><br>
+		<b>Плюсы:</b>
+		<ul>
+			<li>Полная поддержка всех компонентов “из коробки”</li>
+			<li>Простая установка JDK, SDK и NetBeans</li>
+			<li>Рабочие эмуляторы Java ME</li>
+			<li>Хорошая совместимость со старыми версиями Java</li>
+		</ul>
+		<b>Минусы:</b>
+		<ul>
+			<li>Более высокая нагрузка на систему</li>
+			<li>Требует лицензии Windows</li>
+			<li>Меньше гибкости в настройках окружения</li>
+		</ul>
+	</p><br>
+	<p>
+		<p class="h4" id="requirements_6_2">* Linux</p>
+		JDK и NetBeans прекрасно работают на Linux, но Oracle Java ME SDK 3.4 официально не поддерживается. Однако можно использовать Wine для запуска Windows-версии SDK.<br><br>
+		<b>Плюсы:</b>
+		<ul>
+			<li>Стабильность и высокая производительность</li>
+			<li>Бесплатность и открытость системы</li>
+			<li>Простая установка JDK и NetBeans через пакетные менеджеры</li>
+			<li>Возможность автоматизации через скрипты</li>
+		</ul>
+		<b>Минусы:</b>
+		<ul>
+			<li>Java ME SDK не работает нативно</li>
+			<li>Эмуляторы устройств часто не запускаются под Wine</li>
+			<li>Требуется ручная настройка окружения</li>
+			<li>Зачастую требуется настройка аудио для Эмулятора</li>
+		</ul>
+		<b>Решение:</b><br>
+		Можно установить Wine (например, sudo apt install wine) и запустить Java ME SDK 3.4 в нём.<br>
+		Работает, но с ограничениями (иногда не открывается Device Manager, не отображается UI эмулятора или при взаимодействии со звуком в эмуляторах зачастую приложение экстренно закроется, либо выдаст ошибку).
+	</p><br>
+	<p>
+		<p class="h4" id="requirements_6_3">* macOS</p>
+		JDK и NetBeans работают стабильно, но Java ME SDK 3.4 не имеет версии для macOS.<br><br>
+		<b>Плюсы:</b>
+		<ul>
+			<li>Отличная производительность Java SE/EE</li>
+			<li>Удобная установка и стабильность IDE</li>
+		</ul>
+		<b>Минусы:</b>
+		<ul>
+			<li>Нет официальной поддержки Java ME SDK</li>
+			<li>Эмуляторы и Wireless Toolkit не работают нативно</li>
+		</ul>
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="install_1">Подготовка</p>
+	<p>
+		Для подготовки нам потребуется скачать необходимые файлы:
+	</p>
+	<ul>
+		<li><a href="https://nnproject.cc/dl/d/jdk-7u80-windows-i586.exe">Java Development Kit 7 (JDK 7)</a></li>
+		<li><a href="https://nnproject.cc/dl/d/sun_java_wireless_toolkit-2.5.2_01-win.exe">Sun Java Wireless Toolkit (SJWT) 2.5.2</a></li>
+		<li><a href="https://nnproject.cc/dl/d/oracle-jmesdk-3-4-rr-win32-bin.exe">Oracle JavaME SDK 3.4</a></li>
+		<li><a href="https://nnproject.cc/dl/d/netbeans-7.3-windows.exe">NetBeans IDE 7.3</a></li>
+	</ul>
+	<p>
+		<br>Так же нам потребуется сама библиотека! Скачать её можно <a href="">здесь</a>.
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="install_2">Установка</p>
+	<p>
+		Для начала нам потребуется (для удобства) создать в корне диска <span class="badge bg-secondary">C:\</span> с именем на латинице. В неё мы будем устанавливать все наши приложения!<br><br>
+		После создания мы можем устанавливать все скачанные приложения. В момент установки выбирайте созданную папку для наших приложений! (Сначала ставит Java 7, потом остальное)<br><br>
+		Установочники, которые потребуют Java, обычно сами находят установленную. Но вы можете выбрать свою Java, нужно будет просто указать путь к папке Java, например: <span class="badge bg-secondary">C:\your_folder\jdk1.7.0_80</span>
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="install_3">Настройка</p>
+	<p>
+		После скачивания и установки вам потребуется запустить наш IDE. После запуска вы увидите начальную страницу:<br>
+		<img src="./static/0.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		После запуска, в левом, вверхнем углу нажмите на <span class="badge bg-secondary">Файл</span>, после нажмите <span class="badge bg-secondary">Создать проект</span>.<br>
+		После нажатия, вы увидите окно создания проекта! Выберите в списках <span class="badge bg-secondary">JavaME</span>, во втором списке выберите <span class="badge bg-secondary">Мобильное приложение</span>:<br>
+		<img src="./static/1.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		На следующем окне вы увидите ошибку, это нормально, так как мы не настроили платформы! На окне с ошибкой выбираем <span class="badge bg-secondary">Установить пакет SDK/платформу/эмулятор...</span>:<br>
+		<img src="./static/2.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		Мы должны увидеть данное окно. Справа, внизу выбираем <span class="badge bg-secondary">Добавить платформу</span>:<br>
+		<img src="./static/3.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		В первом окне мы выбираем второй пункт, нажимаем <span class="badge bg-secondary">Далее ></span><br>
+		А во втором пункте IDE сама попытается найти платформы, но она найдёт только SJWTK. Нам нужно добавить ещё JavaME SDK, нажимаем на <span class="badge bg-secondary">Поиск дополнительных папок платформы Java ME...</span>:<br>
+		<img src="./static/4.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;">
+		<img src="./static/5.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		Откроется диалоговое окно с просмотром папок. Выбираем папку с JavaME SDK, которая лежит в нашей созданной папке и нажимаем <span class="badge bg-secondary">open</span>... В моём случае у меня папка лежит в корне диска <span class="badge bg-secondary">C:\</span>:<br>
+		<img src="./static/6.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		После выбора, диалоговое окно закроется, а мы должны увидеть вторую папку в списке! Нажимаем <span class="badge bg-secondary">Далее ></span><br>
+		<img src="./static/7.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		После проверки он обнаружит файлы эмуляторов и нужные библиотеки для работы стандартных приложений! Для завершения настройки платформ, нажимаем <span class="badge bg-secondary">Готово</span><br>
+		<img src="./static/8.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		Окно добавления платформы закроется, и мы должны увидеть, что слева появились наши платформы, смело нажимаем <span class="badge bg-secondary">Закрыть</span>:<br>
+		<img src="./static/9.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		После закрытия мы можем увидеть что ошибка пропала, а кнопка <span class="badge bg-secondary">Далее ></span> стала доступной, нажимаем:<br>
+		<img src="./static/10.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		Далее нам нужно создать имя для нашего проекта, замените стандартное имя на ваше, и нажимайте <span class="badge bg-secondary">Далее ></span>:<br>
+		<img src="./static/11.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		В последнем для нас окне мы можем выбрать нашу платформу (у каждой платформы свой эмулятор, если хотите простой эмулятор, то выбирайте SJWTK, если продвинутый то выбирайте JavaME SDK и в списке устройств выбирайте JavaMEPhone1) и устройство (для каждой платформы своё устройство). Так же вы можете выбрать конфигурацию и профиль устрорйства. После того как вы со всем определились, нажимайте заветную кнопку <span class="badge bg-secondary">Готово</span>:<br>
+		<img src="./static/12.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+		Готово! Теперь вы можете писать код и производить отладку! После завершения, вы увидите редактор. Что бы запустить проект, нажмите на зелёную кнопку Play. Что бы зайти в свойства проекта, нажмите <span class="badge bg-secondary">файл</span>, после кнопку <span class="badge bg-secondary">Свойства (your_project_name).</span><br>
+		<img src="./static/13.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;"><br>
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p>После подготовки, кстановки и настройки, мы можем теперь перейти к изучению Midlet, Alert и Canvas!</p>
+{% endblock %}

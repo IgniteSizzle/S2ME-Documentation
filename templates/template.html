@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<title>S2ME - {% block headTitle %}{% endblock %}</title>
+		
+		<link href="./static/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./static/css/atom-one-dark.min.css">
+		<script src="./static/js/bootstrap.bundle.min.js"></script>
+		<script src="./static/js/highlight.min.js"></script>
+		<script src="./static/js/languages/java.min.js"></script>
+
+		<script>hljs.highlightAll();</script>
+
+		<style>
+			pre {
+				border-radius: 6px;
+				overflow-x: auto;
+			}
+		</style>
+		{% block head %}{% endblock %}
+	</head>
+	<body data-bs-theme="dark">
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/home">S2ME Documentation</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarsExample09">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Начало</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/welcome">Добро пожаловать</a></li>
+								<li><a class="dropdown-item" href="/install">Подготовка и установка</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="/tutorial_midlet">Основы Midlet</a></li>
+								<li><a class="dropdown-item" href="/tutorial_alert">Основы Alert</a></li>
+								<li><a class="dropdown-item" href="/tutorial_canvas">Основы Canvas</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Функции</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="/first_scene">Создание первой сцены</a></li>
+								<li><a class="dropdown-item" href="/sceneManager">SceneManager</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="/audioPlayer">AudioPlayer</a></li>
+								<li><a class="dropdown-item" href="/buttonView">ButtonView</a></li>
+								<li><a class="dropdown-item" href="/cursorView">CursorView</a></li>
+								<li><a class="dropdown-item" href="/gameSaveManager">GameSaveManager</a></li>
+								<li><a class="dropdown-item" href="/imageView">ImageView</a></li>
+								<li><a class="dropdown-item" href="/textBlitter">TextBlitter</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="/player">Player</a></li>
+								<li><a class="dropdown-item" href="/tilesetMap">TilesetMap</a></li>
+								<li><a class="dropdown-item" href="/undertaleBox">Undertale Box</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"><a class="nav-link disabled" aria-disabled="true">|</a></li>
+						{% block bodyNavbar %}{% endblock %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 60px 10px;">{% block bodyMain %}{% endblock %}</div>
+	</body>
+</html>

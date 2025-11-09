@@ -1,0 +1,178 @@
+{% extends "template.html" %}
+
+{% block headTitle %}Основы Midlet{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyNavbar %}
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Якоря</a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item" href="#">null</a></li>
+		</ul>
+	</li>
+{% endblock %}
+{% block bodyMain %}
+	<div class="text-center" id="welcome">
+		<p class="h1" id="welcome">Основы Midlet</p>
+		<p>
+			В этом разделе мы изучим Midlet и напишем своё первое приложение!
+		</p>
+	</div>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Что такое MIDlet</p>
+	<p>
+		<b>MIDlet</b> — это основной класс любого приложения Java ME, предназначенного для мобильных устройств.<br>
+		Он управляет жизненным циклом программы и взаимодействует с системой (AMS — <em>Application Management Software</em>).
+		<br><br>
+		Приложение Java ME всегда состоит из одного или нескольких MIDlet’ов, но при запуске выбирается только один главный.<br>
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Архитектура Java ME и роль MIDlet</p>
+	Прежде чем писать код, важно понимать, где работает MIDlet:
+	<ul>
+		<li>Мобильная ОС / Устройство</li>
+		<li>Java ME (KVM — виртуальная машина)</li>
+		<li>MIDP API  (Mobile Information Device)</li>
+		<li>MIDlet-приложение (твой код)</li>
+	</ul>
+	<p>
+		MIDlet — это <b>точка входа</b> в программу, как <span class="badge bg-secondary">main()</span> в обычной Java, но управляется не нами напрямую, а системой Java ME.
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Жизненный цикл MIDlet</p>
+	<p>
+		У MIDlet нет метода <span class="badge bg-secondary">main()</span>. Вместо этого система вызывает три метода, определённые в классе <span class="badge bg-secondary">javax.microedition.midlet.MIDlet</span>.
+
+		Эти методы формируют жизненный цикл приложения:
+		<table class="table table-sm table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Метод</th>
+					<th scope="col">Как вызывается</th>
+					<th scope="col">Что делает</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td><code class="language-java">startApp()</code></td>
+					<td>Когда MIDlet запускается или возвращается из паузы</td>
+					<td>Запускает или возобновляет работу приложения</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td><code class="language-java">pauseApp()</code></td>
+					<td>Когда приложение приостанавливается (например, входящий звонок)</td>
+					<td>Сохраняет состояние или приостанавливает потоки</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td><code class="language-java">destroyApp(boolean unconditional)</code></td>
+					<td>Когда приложение закрывается</td>
+					<td>Освобождает ресурсы перед завершением</td>
+				</tr>
+			</tbody>
+		</table>
+	</p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Схема жизненного цикла MIDlet</p>
+	<img src="./static/scheme_0.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;">
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Базовая структура MIDlet</p>
+	<p>Пример минимального MIDlet-приложения:</p>
+	<pre><code class="language-java">
+		import javax.microedition.midlet.MIDlet;
+
+		public class HelloWorldMidlet extends MIDlet {
+
+			public HelloWorldMidlet() {
+				System.out.println("Конструктор вызван — MIDlet создан.");
+			}
+
+			protected void startApp() {
+				System.out.println("startApp(): MIDlet запущен!");
+			}
+
+			protected void pauseApp() {
+				System.out.println("pauseApp(): MIDlet приостановлен.");
+			}
+
+			protected void destroyApp(boolean unconditional) {
+				System.out.println("destroyApp(): MIDlet завершён.");
+			}
+		}
+	</code></pre>
+	<b>Что происходит:</b>
+	<ul>
+		<li>Когда AMS запускает MIDlet, вызывается конструктор.</li>
+		<li>Затем система вызывает <span class="badge bg-secondary">startApp()</span>.</li>
+		<li>Если приложение нужно приостановить — вызывается <span class="badge bg-secondary">pauseApp()</span>.</li>
+		<li>При завершении — <span class="badge bg-secondary">destroyApp()</span>.</li>
+	</ul>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Класс <span class="badge bg-secondary">MIDlet</span> и его возможности</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Класс Display</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Класс <span class="badge bg-secondary">Form</span> — базовый экран приложения</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Команды (<span class="badge bg-secondary">Command</span>) и обработка событий (<span class="badge bg-secondary">CommandListener</span>)</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Дополнительные элементы интерфейса</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Файл описания <span class="badge bg-secondary">.jad</span></p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Проверка разрешений</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Открытие внешних URL (например, браузера)</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Пример полноценного MIDlet-приложения</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Краткий обзор возможностей MIDlet</p>
+	<p></p>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="">Вывод</p>
+	<p></p>
+{% endblock %}

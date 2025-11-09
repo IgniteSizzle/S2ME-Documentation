@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+{% block headTitle %}TestPage{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyNavbar %}
+	<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">TestButton1</a></li>
+	<li class="nav-item"><a class="nav-link" href="#">TestButton2</a></li>
+	<li class="nav-item"><a class="nav-link disabled" aria-disabled="true">TestButton3</a></li>
+	
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item" href="#">Item 1</a></li>
+			<li><a class="dropdown-item" href="#">Item 2</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#">Item 3</a></li>
+		</ul>
+	</li>
+{% endblock %}
+{% block bodyMain %}{% endblock %}
