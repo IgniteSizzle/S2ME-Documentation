@@ -56,6 +56,10 @@ def imageView():
 @app.route('/textBlitter')
 def textBlitter():
     return render_template('components/textBlitter.html')
+    
+@app.route('/lmelib')
+def lmelib():
+    return render_template('components/lmelib.html')
 
 @app.route('/player')
 def player():

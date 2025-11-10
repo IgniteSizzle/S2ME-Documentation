@@ -1,0 +1,861 @@
+{% extends "template.html" %}
+
+{% block headTitle %}TestPage{% endblock %}
+{% block head %}{% endblock %}
+
+{% block bodyNavbar %}
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Якори</a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item" href="#">О классе</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_1">Архитектура и дизайн</a></li>
+			<li><a class="dropdown-item" href="#info_1_1">Основные компоненты</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_2">Детальная спецификация методов</a></li>
+			<li><a class="dropdown-item" href="#info_2_1">Конструкторы и инициализация</a></li>
+			<li><a class="dropdown-item" href="#info_2_2">Выполнение кода и управление состоянием</a></li>
+			<li><a class="dropdown-item" href="#info_2_3">Работа с переменными</a></li>
+			<li><a class="dropdown-item" href="#info_2_4">Система функций и callback'ов</a></li>
+			<li><a class="dropdown-item" href="#info_2_5">Управление кэшем и производительностью</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_3">Интерфейсы и расширяемость</a></li>
+			<li><a class="dropdown-item" href="#info_3_1">Интерфейс кастомных функций</a></li>
+			<li><a class="dropdown-item" href="#info_3_2">Интерфейс загрузки файлов</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_4">Таблицы Lua</a></li>
+			<li><a class="dropdown-item" href="#info_4_1">Реализация и использование</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_5">Примеры использования в реальных проектах</a></li>
+			<li><a class="dropdown-item" href="#info_5_1">Игровой движок</a></li>
+			<li><a class="dropdown-item" href="#info_5_2">Бизнес-приложение</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_6">Расширенные паттерны использования</a></li>
+			<li><a class="dropdown-item" href="#info_6_1">Плагинная система</a></li>
+			<li><a class="dropdown-item" href="#info_6_2">Конфигурационная система</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_7">Производительность и оптимизация</a></li>
+			<li><a class="dropdown-item" href="#info_7_1">Рекомендации по использованию</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#info_8">Отладка и диагностика</a></li>
+			<li><a class="dropdown-item" href="#info_8_1">Инструменты отладки</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#end">Заключение</a></li>
+		</ul>
+	</li>
+{% endblock %}
+{% block bodyMain %}
+	<div class="text-center" id="welcome">
+		<p class="h1">LuaME Lib</p>
+		<p>
+			Этом разделе мы изучим сециальзированный загрузчик <span class="badge bg-secondary">Lua</span>, сделанный специально под JavaME!<br>
+			Данный класс является вторым и рабочим классом по работе с Lua в JavaME.
+		</p>
+	</div>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="about">О классе</p>
+	<p>
+		<b>LMELib</b> - это революционный класс, представляющий собой первый и единственный полнофункциональный парсер языка Lua, разработанный специально для <b>Java ME</b> (Micro Edition). Данная реализация учитывает технические ограничения мобильных устройств, предоставляя разработчикам мощный инструмент для создания динамических и гибких приложений на платформах с ограниченными ресурсами.
+	</p>
+	<p>
+		LMELib не первопроходец, так как существет luaj. Класс о котором мы будем говорить, был сделан для удобства и простоты. Так же данный класс является уникальным, так как данный класс предоставляет:
+		<ul>
+			<li>Полноценный парсер Lua с поддержкой основных конструкций языка</li>
+			<li>Интеграцию с Java кодом через callback'и и кастомные функции</li>
+			<li>Импорт внешних скриптов из ресурсов JAR</li>
+			<li>Оптимизацию для мобильных устройств с ограниченной памятью и CPU</li>
+		</ul>
+	</p>
+	
+	<p class="h3">Ключевые инновации</p>
+	<pre><code class="language-java">
+		// ДО LMELib - статическая логика
+		public class Game {
+			private int playerX = 100;
+			private int playerY = 100;
+			
+			public void update() {
+				// Жестко закодированная логика
+				playerX += 5;
+				if (playerX > 240) playerX = 0;
+			}
+		}
+
+		// С LMELib - динамическая логика через Lua
+		public class Game {
+			private LMELib lua;
+			
+			public Game() {
+				lua = new LMELib();
+				lua.execute(@"
+					player = {x = 100, y = 100}
+					function update()
+						player.x = player.x + 5
+						if player.x > 240 then player.x = 0 end
+					end
+				");
+			}
+			
+			public void update() {
+				lua.callFunction("update", null);
+			}
+		}
+	</code></pre>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="doc">Полная документация класса</p>
+	
+	<p class="h3" id="info_1">Архитектура и дизайн</p>
+	<p class="h5" id="info_1_1">Основные компоненты</p>
+	<pre><code class="language-java">
+		/**
+		 * LMELib - полнофункциональный парсер Lua для Java ME
+		 * 
+		 * Архитектура класса:
+		 * - LuaParser: Лексический анализатор и парсер
+		 * - LuaTable: Реализация таблиц Lua
+		 * - PerformanceMonitor: Мониторинг производительности
+		 * - FileLoader: Система загрузки файлов
+		 * - CustomFunctionChecker: Механизм кастомных функций
+		 * 
+		 * Особенности реализации:
+		 * - Написано на чистом Java ME 1.3
+		 * - Не требует внешних библиотек
+		 * - Оптимизировано для low-memory устройств
+		 * - Поддержка основных конструкций Lua 5.1
+		 */
+		public class LMELib {
+			// Ядро парсера
+			private class LuaParser {
+				// Лексический анализ, парсинг, выполнение
+			}
+			
+			// Система типов
+			public class LuaTable {
+				// Гибридная реализация (массив + хэш-таблица)
+			}
+			
+			// Мониторинг
+			private class PerformanceMonitor {
+				// Статистика выполнения и профилирование
+			}
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_2">Детальная спецификация методов</p>
+	<p class="h5" id="info_2_1">Конструкторы и инициализация</p>
+	<pre><code class="language-java">
+		/**
+		 * Основной конструктор LMELib
+		 * Инициализирует Lua среду с базовыми функциями
+		 * 
+		 * Включает:
+		 * - Глобальные переменные (_VERSION)
+		 * - Стандартные библиотеки (math, string, table)
+		 * - Системные функции (print, type, tonumber, tostring)
+		 * - Callback систему (registerCallback)
+		 * - Загрузчик файлов по умолчанию
+		 */
+		public LMELib()
+
+		/**
+		 * Устанавливает кастомный обработчик функций
+		 * Позволяет расширить Lua функциями на Java
+		 * 
+		 * @param checker - реализация интерфейса CustomFunctionChecker
+		 * Использование:
+		 * - Проверка существования кастомной функции
+		 * - Выполнение Java кода из Lua
+		 */
+		public void setCustomFunctionChecker(CustomFunctionChecker checker)
+
+		/**
+		 * Устанавливает загрузчик файлов
+		 * По умолчанию загружает из ресурсов JAR
+		 * 
+		 * @param loader - реализация интерфейса FileLoader
+		 * Поддерживаемые источники:
+		 * - Ресурсы JAR (/path/to/file.lua)
+		 * - Файловая система
+		 * - Сетевые ресурсы
+		 * - Встроенные данные
+		 */
+		public void setFileLoader(FileLoader loader)
+	</code></pre>
+	
+	<p class="h5" id="info_2_2">Выполнение кода и управление состоянием</p>
+	<pre><code class="language-java">
+		/**
+		 * Выполняет Lua код с возвратом результата
+		 * 
+		 * @param code - строка с Lua кодом
+		 * @return результат выполнения (последнее выражение)
+		 * 
+		 * Особенности:
+		 * - Автоматическая обработка ошибок
+		 * - Поддержка многострочных выражений
+		 * - Возврат различных типов данных
+		 * - Статистика производительности
+		 */
+		public Object execute(String code)
+
+		/**
+		 * Импортирует и выполняет Lua файл
+		 * 
+		 * @param filename - путь к файлу в ресурсах
+		 * @return результат выполнения файла
+		 * @throws IOException если файл не найден
+		 * 
+		 * Кэширование:
+		 * - Файлы кэшируются в памяти
+		 * - Повторный import использует кэш
+		 * - Автоматическое определение изменений
+		 */
+		public Object importFile(String filename) throws IOException
+
+		/**
+		 * Полностью очищает состояние интерпретатора
+		 * 
+		 * Действия:
+		 * - Очистка кэша файлов
+		 * - Удаление всех callback'ов
+		 * - Сброс глобальных переменных
+		 * - Переинициализация среды
+		 * 
+		 * Использование:
+		 * - Смена уровня в игре
+		 * - Перезагрузка скриптов
+		 * - Освобождение памяти
+		 */
+		public void clearAll()
+	</code></pre>
+	
+	<p class="h5" id="info_2_3">Работа с переменными</p>
+	<pre><code class="language-java">
+		/**
+		 * Устанавливает глобальную переменную в Lua среде
+		 * 
+		 * @param name - имя переменной
+		 * @param value - значение (поддерживаемые типы:
+		 *              Double, String, Boolean, LuaTable, LuaFunction, null)
+		 * 
+		 * Примеры преобразований:
+		 * Java -> Lua
+		 * Double(10.5) -> number 10.5
+		 * "text" -> string "text"
+		 * Boolean.TRUE -> boolean true
+		 * null -> nil
+		 * LuaTable -> table
+		 */
+		public void setGlobal(String name, Object value)
+
+		/**
+		 * Получает значение глобальной переменной
+		 * 
+		 * @param name - имя переменной
+		 * @return значение или null если не существует
+		 * 
+		 * Типы возвращаемых значений:
+		 * - Double для чисел
+		 * - String для строк
+		 * - Boolean для логических значений
+		 * - LuaTable для таблиц
+		 * - LuaFunction для функций
+		 * - null для nil
+		 */
+		public Object getGlobal(String name)
+
+		/**
+		 * Возвращает все глобальные переменные
+		 * 
+		 * @return Hashtable со всеми глобальными переменными
+		 * Использование:
+		 * - Отладка состояния
+		 * - Сохранение/загрузка состояния
+		 * - Миграция данных между экземплярами
+		 */
+		public Hashtable getGlobals()
+	</code></pre>
+	
+	<p class="h5" id="info_2_4">Система функций и callback'ов</p>
+	<pre><code class="language-java">
+		/**
+		 * Вызывает Lua функцию из Java кода
+		 * 
+		 * @param functionName - имя глобальной функции
+		 * @param args - массив аргументов
+		 * @param silent - подавление ошибок
+		 * @return результат выполнения функции
+		 * 
+		 * Особенности:
+		 * - Автоматическая конвертация аргументов
+		 * - Обработка исключений выполнения
+		 * - Поддержка различных типов возвращаемых значений
+		 */
+		public Object callFunction(String functionName, Object[] args, boolean silent)
+
+		/**
+		 * Вызывает зарегистрированный callback
+		 * 
+		 * @param callbackName - имя callback'а
+		 * @param args - аргументы для передачи
+		 * @param silent - подавление ошибок если callback не существует
+		 * @return результат выполнения
+		 * 
+		 * Регистрация callback'ов в Lua:
+		 * registerCallback("onUpdate", updateFunction)
+		 */
+		public Object callCallback(String callbackName, Object[] args, boolean silent)
+
+		/**
+		 * Проверяет существование функции
+		 * 
+		 * @param functionName - имя функции для проверки
+		 * @return true если функция существует и вызываема
+		 * 
+		 * Использование:
+		 * - Проверка перед вызовом
+		 * - Динамическое определение возможностей
+		 * - Обработка опциональных функций
+		 */
+		public boolean functionExists(String functionName)
+
+		/**
+		 * Проверяет существование callback'а
+		 * 
+		 * @param callbackName - имя callback'а
+		 * @return true если callback зарегистрирован
+		 * 
+		 * Особенности:
+		 * - Callback'и регистрируются через registerCallback
+		 * - Могут быть удалены через clearCallbacks
+		 */
+		public boolean callbackExists(String callbackName)
+	</code></pre>
+	
+	<p class="h5" id="info_2_5">Управление кэшем и производительностью</p>
+	<pre><code class="language-java">
+		/**
+		 * Замеряет производительность выполнения кода
+		 * 
+		 * @param code - Lua код для тестирования
+		 * @param iterations - количество итераций
+		 * 
+		 * Выводит отчет:
+		 * - Среднее время выполнения
+		 * - Минимальное/максимальное время
+		 * - Общее время теста
+		 * 
+		 * Использование:
+		 * - Оптимизация критических участков
+		 * - Сравнение алгоритмов
+		 * - Профилирование скриптов
+		 */
+		public void benchmark(String code, int iterations)
+
+		/**
+		 * Показывает отчет о производительности
+		 * 
+		 * Метрики:
+		 * - Время парсинга
+		 * - Время выполнения
+		 * - Количество statements
+		 * - Среднее время на statement
+		 * 
+		 * Сбор статистики:
+		 * - Включается автоматически
+		 * - Сбрасывается при clearAll
+		 * - Не влияет на производительность
+		 */
+		public void performanceReport()
+
+		/**
+		 * Управление кэшем файлов
+		 * 
+		 * Методы:
+		 * - clearCache() - полная очистка
+		 * - clearCache(filename) - удаление конкретного файла
+		 * - printCacheInfo() - информация о кэше
+		 * 
+		 * Преимущества кэширования:
+		 * - Ускорение повторной загрузки
+		 * - Снижение нагрузки на IO
+		 * - Консистентность выполнения
+		 */
+		public void clearCache()
+		public void clearCache(String filename)
+		public void printCacheInfo()
+	</code></pre>
+	
+	<p class="h3" id="info_3">Интерфейсы и расширяемость</p>
+	<p class="h5" id="info_3_1">Интерфейс кастомных функций</p>
+	<pre><code class="language-java">
+		/**
+		 * Интерфейс для создания кастомных Lua функций на Java
+		 * 
+		 * Использование:
+		 * 1. Реализовать интерфейс
+		 * 2. Зарегистрировать через setCustomFunctionChecker
+		 * 3. Функции становятся доступны в Lua коде
+		 */
+		public interface CustomFunctionChecker {
+			/**
+			 * Проверяет, является ли функция кастомной
+			 * 
+			 * @param funcName - имя функции из Lua кода
+			 * @param args - аргументы вызова
+			 * @return true если функция должна обрабатываться Java
+			 */
+			boolean checkFunction(String funcName, Vector args);
+			
+			/**
+			 * Выполняет кастомную функцию
+			 * 
+			 * @param funcName - имя функции
+			 * @param args - аргументы
+			 * @return результат для возврата в Lua
+			 */
+			Object executeCustomFunction(String funcName, Vector args);
+		}
+
+		// Пример реализации
+		public class GameFunctionChecker implements LMELib.CustomFunctionChecker {
+			public boolean checkFunction(String funcName, Vector args) {
+				return "drawSprite".equals(funcName) || 
+					   "playSound".equals(funcName) ||
+					   "getInput".equals(funcName);
+			}
+			
+			public Object executeCustomFunction(String funcName, Vector args) {
+				if ("drawSprite".equals(funcName)) {
+					// Логика отрисовки спрайта
+					return Boolean.TRUE;
+				}
+				// ... обработка других функций
+				return null;
+			}
+		}
+		public void setFileLoader(FileLoader loader)
+	</code></pre>
+	
+	<p class="h5" id="info_3_2">Интерфейс загрузки файлов</p>
+	<pre><code class="language-java">
+		/**
+		 * Интерфейс для кастомной загрузки Lua файлов
+		 * 
+		 * Позволяет:
+		 * - Загружать из различных источников
+		 * - Динамически генерировать контент
+		 * - Реализовывать кэширование
+		 * - Обрабатывать ошибки загрузки
+		 */
+		public interface FileLoader {
+			/**
+			 * Загружает содержимое файла
+			 * 
+			 * @param filename - путь к файлу
+			 * @return содержимое файла как String
+			 * @throws IOException если файл не найден или ошибка чтения
+			 */
+			String loadFile(String filename) throws IOException;
+		}
+
+		// Пример кастомного загрузчика
+		public class NetworkFileLoader implements LMELib.FileLoader {
+			public String loadFile(String filename) throws IOException {
+				// Загрузка по HTTP
+				HttpConnection conn = null;
+				try {
+					conn = (HttpConnection) Connector.open("http://server/" + filename);
+					InputStream is = conn.openInputStream();
+					// Чтение и возврат содержимого
+					return readStream(is);
+				} finally {
+					if (conn != null) conn.close();
+				}
+			}
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_4">Таблицы Lua</p>
+	<p class="h5" id="info_4_1">Реализация и использование</p>
+	<pre><code class="language-java">
+		/**
+		 * LuaTable - гибридная реализация таблиц Lua
+		 * 
+		 * Особенности:
+		 * - Array часть: индексы с 1 до n
+		 * - Hash часть: произвольные ключи
+		 * - Автоматическое определение типа индекса
+		 * - Поддержка оператора длины (#)
+		 */
+		public class LuaTable {
+			/**
+			 * Устанавлиет значение по ключу
+			 * 
+			 * @param key - ключ (Double для массива, другие для хэша)
+			 * @param value - устанавливаемое значение
+			 * 
+			 * Примеры:
+			 * table.set(new Double(1), "array value")  -> array[1]
+			 * table.set("name", "John")                -> table.name
+			 * table.set(new Double(5), "value")        -> расширяет массив
+			 */
+			public void set(Object key, Object value)
+			
+			/**
+			 * Получает значение по ключу
+			 * 
+			 * @param key - ключ для поиска
+			 * @return значение или null если не найдено
+			 * 
+			 * Приоритет поиска:
+			 * 1. Array часть (если key instanceof Double)
+			 * 2. Hash часть
+			 */
+			public Object get(Object key)
+			
+			/**
+			 * Возвращает длину array части
+			 * 
+			 * @return количество элементов в array части
+			 * Соответствует оператору # в Lua
+			 */
+			public int length()
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_5">Примеры использования в реальных проектах</p>
+	<p class="h5" id="info_5_1">Игровой движок</p>
+	<pre><code class="language-java">
+		/**
+		 * Пример интеграции LMELib в мобильную игру
+		 * Демонстрирует разделение логики и представления
+		 */
+		public class MobileGame extends Canvas {
+			private LMELib lua;
+			private boolean running;
+			
+			public MobileGame() {
+				lua = new LMELib();
+				initializeGameEngine();
+			}
+			
+			private void initializeGameEngine() {
+				// Настройка Lua среды для игры
+				lua.setGlobal("SCREEN_WIDTH", new Double(getWidth()));
+				lua.setGlobal("SCREEN_HEIGHT", new Double(getHeight()));
+				
+				// Регистрация игровых функций
+				lua.setCustomFunctionChecker(new GameFunctions());
+				
+				try {
+					// Загрузка игровых скриптов
+					lua.importFile("/game/entities.lua");
+					lua.importFile("/game/levels.lua");
+					lua.importFile("/game/ai.lua");
+					
+					// Инициализация игры через Lua
+					lua.execute("game = Game:new()");
+					lua.execute("level = Level:load('forest')");
+					
+				} catch (IOException e) {
+					System.err.println("Failed to load game scripts");
+				}
+			}
+			
+			protected void paint(Graphics g) {
+				// Отрисовка через Lua
+				lua.callCallback("onRender", new Object[]{g}, true);
+			}
+			
+			public void gameLoop() {
+				running = true;
+				while (running) {
+					long startTime = System.currentTimeMillis();
+					
+					// Обновление игры через Lua
+					lua.callCallback("onUpdate", new Object[]{0.016}, true);
+					
+					// Отрисовка
+					repaint();
+					serviceRepaints();
+					
+					// Контроль FPS
+					long frameTime = System.currentTimeMillis() - startTime;
+					if (frameTime < 16) {
+						try { Thread.sleep(16 - frameTime); } 
+						catch (InterruptedException e) {}
+					}
+				}
+			}
+		}
+	</code></pre>
+	
+	<p class="h5" id="info_5_2">Бизнес-приложение</p>
+	<pre><code class="language-java">
+		/**
+		 * Пример использования LMELib в бизнес-приложении
+		 * Динамические бизнес-правила и валидации
+		 */
+		public class BusinessApp {
+			private LMELib lua;
+			
+			public BusinessApp() {
+				lua = new LMELib();
+				setupBusinessRules();
+			}
+			
+			private void setupBusinessRules() {
+				try {
+					// Загрузка бизнес-правил
+					lua.importFile("/rules/validation.lua");
+					lua.importFile("/rules/calculations.lua");
+					lua.importFile("/rules/workflow.lua");
+					
+				} catch (IOException e) {
+					System.err.println("Failed to load business rules");
+				}
+				
+				// Регистрация системных функций
+				lua.setCustomFunctionChecker(new BusinessFunctions());
+			}
+			
+			public boolean validateOrder(Order order) {
+				// Валидация через Lua правила
+				lua.setGlobal("currentOrder", convertToTable(order));
+				Object result = lua.callFunction("validateOrder", null);
+				return Boolean.TRUE.equals(result);
+			}
+			
+			public double calculateTax(Order order) {
+				// Расчет налогов через Lua
+				lua.setGlobal("currentOrder", convertToTable(order));
+				Object result = lua.callFunction("calculateTax", null);
+				return result instanceof Double ? ((Double)result).doubleValue() : 0.0;
+			}
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_6">Расширенные паттерны использования</p>
+	<p class="h5" id="info_6_1">Плагинная система</p>
+	<pre><code class="language-java">
+		/**
+		 * Реализация плагинной системы на основе LMELib
+		 * Позволяет динамически расширять функциональность
+		 */
+		public class PluginSystem {
+			private LMELib lua;
+			private Hashtable plugins;
+			
+			public PluginSystem() {
+				lua = new LMELib();
+				plugins = new Hashtable();
+				setupPluginAPI();
+			}
+			
+			private void setupPluginAPI() {
+				// API для плагинов
+				lua.execute(@"
+					PluginAPI = {
+						register = function(name, plugin)
+							-- Регистрация плагина в системе
+						end,
+						call = function(plugin, method, ...)
+							-- Вызов метода плагина
+						end
+					}
+				");
+			}
+			
+			public void loadPlugin(String name, String luaCode) {
+				try {
+					lua.execute(luaCode);
+					plugins.put(name, lua.getGlobal(name));
+				} catch (Exception e) {
+					System.err.println("Failed to load plugin: " + name);
+				}
+			}
+			
+			public Object executePluginMethod(String pluginName, String method, Object[] args) {
+				LuaTable plugin = (LuaTable) plugins.get(pluginName);
+				if (plugin != null) {
+					LuaFunction methodFunc = (LuaFunction) plugin.get(method);
+					if (methodFunc != null) {
+						Vector argVector = new Vector();
+						for (int i = 0; i < args.length; i++) {
+							argVector.addElement(args[i]);
+						}
+						return methodFunc.execute(argVector);
+					}
+				}
+				return null;
+			}
+		}
+	</code></pre>
+	
+	<p class="h5" id="info_6_2">Конфигурационная система</p>
+	<pre><code class="language-java">
+		/**
+		 * Динамическая конфигурационная система
+		 * Конфиги в Lua с поддержкой условий и вычислений
+		 */
+		public class ConfigSystem {
+			private LMELib lua;
+			
+			public ConfigSystem() {
+				lua = new LMELib();
+			}
+			
+			public void loadConfig(String configLua) {
+				lua.execute(configLua);
+			}
+			
+			public Object getConfig(String key) {
+				return lua.getGlobal(key);
+			}
+			
+			public boolean getBoolean(String key, boolean defaultValue) {
+				Object value = lua.getGlobal(key);
+				if (value instanceof Boolean) {
+					return ((Boolean)value).booleanValue();
+				}
+				return defaultValue;
+			}
+			
+			public int getInt(String key, int defaultValue) {
+				Object value = lua.getGlobal(key);
+				if (value instanceof Double) {
+					return ((Double)value).intValue();
+				}
+				return defaultValue;
+			}
+		}
+
+		// Пример конфигурационного файла config.lua
+		-- Условия для разных устройств
+		if SCREEN_WIDTH < 240 then
+			FONT_SIZE = 12
+			BUTTON_SIZE = "small"
+		else
+			FONT_SIZE = 16
+			BUTTON_SIZE = "normal"
+		end
+
+		-- Вычисляемые значения
+		MAX_PLAYERS = 4
+		GAME_SPEED = 1.0
+		DEBUG_MODE = true
+
+		-- Сложные структуры
+		UI_THEME = {
+			colors = {
+				primary = 0xFF0000,
+				secondary = 0x00FF00,
+				background = 0x000000
+			},
+			fonts = {
+				main = "System",
+				title = "SystemBold"
+			}
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_7">Производительность и оптимизация</p>
+	<p class="h5" id="info_7_1">Рекомендации по использованию</p>
+	<pre><code class="language-java">
+		/**
+		 * Советы по оптимизации производительности LMELib
+		 */
+		public class PerformanceTips {
+			
+			public void optimizationExamples() {
+				LMELib lua = new LMELib();
+				
+				// ✅ ХОРОШО - Кэширование часто используемых функций
+				LuaFunction updateFunc = (LuaFunction) lua.getGlobal("updateGame");
+				// Многократный вызов без поиска по имени
+				for (int i = 0; i < 100; i++) {
+					updateFunc.execute(new Vector());
+				}
+				
+				// ✅ ХОРОШО - Пакетное выполнение
+				lua.execute(@"
+					for i = 1, 100 do
+						updateEntity(i)
+					end
+				");
+				
+				// ❌ ПЛОХО - Многократный поиск функций
+				for (int i = 0; i < 100; i++) {
+					lua.callFunction("updateEntity", new Object[]{new Integer(i)});
+				}
+				
+				// ✅ ХОРОШО - Использование таблиц вместо множества переменных
+				lua.execute(@"
+					-- Вместо отдельных переменных
+					gameState = {
+						player = {x=0, y=0, health=100},
+						enemies = {},
+						score = 0
+					}
+				");
+			}
+		}
+	</code></pre>
+	
+	<p class="h3" id="info_8">Отладка и диагностика</p>
+	<p class="h5" id="info_8_1">Инструменты отладки</p>
+	<pre><code class="language-java">
+		/**
+		 * Утилиты для отладки Lua кода в LMELib
+		 */
+		public class DebugUtils {
+			
+			public static void dumpGlobals(LMELib lua) {
+				System.out.println("=== GLOBALS DUMP ===");
+				Hashtable globals = lua.getGlobals();
+				Enumeration keys = globals.keys();
+				while (keys.hasMoreElements()) {
+					String key = (String) keys.nextElement();
+					Object value = globals.get(key);
+					System.out.println(key + " = " + value + " (" + 
+						(value != null ? value.getClass().getSimpleName() : "null") + ")");
+				}
+			}
+			
+			public static void traceExecution(LMELib lua, String code) {
+				System.out.println("Executing: " + code);
+				long start = System.currentTimeMillis();
+				try {
+					Object result = lua.execute(code);
+					long time = System.currentTimeMillis() - start;
+					System.out.println("Result: " + result + " (took " + time + "ms)");
+				} catch (Exception e) {
+					System.err.println("Error: " + e.getMessage());
+				}
+			}
+		}
+	</code></pre>
+	
+	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
+	
+	<p class="display-6" id="end">Заключение</p>
+	<p>
+		LMELib представляет собой прорыв в разработке для Java ME, предоставляя полноценный скриптовый движок для мобильных устройств. Его уникальная архитектура, оптимизированная для работы в условиях ограниченных ресурсов, открывает новые возможности для создания динамических и расширяемых приложений.<br>
+		<p class="h3">Ключевые преимущества:</p>
+		<ul>
+			<li><b>Полнота</b> - поддержка основных конструкций Lua</li>
+			<li><b>Производительность</b> - оптимизация для мобильных устройств</li>
+			<li><b>Расширяемость</b> - интеграция с Java кодом</li>
+			<li><b>Модульность</b> - система импорта и кэширования</li>
+			<li><b>Отладка</b> - встроенные инструменты диагностики</li>
+		</ul>
+	</p>
+	<p>
+		LMELib не просто парсер - это мост между статическим миром Java ME и динамическим миром Lua, создающий беспрецедентные возможности для разработчиков мобильных приложений.
+	</p>
+{% endblock %}
