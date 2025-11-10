@@ -85,7 +85,7 @@
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
 	<p class="display-6" id="">Схема жизненного цикла MIDlet</p>
-	<img src="./static/scheme_0.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 800px; width: 100%; margin: 0 auto; padding: 10px 10px 10px 10px;">
+	<img src="./static/scheme_0.png" class="rounded mx-auto d-block" alt="Начальная страница NetBeans 7.3" style="max-width: 512px; width: 100%; margin: 0 auto; max-height: 512px; height: 100%; padding: 10px 10px 10px 10px;">
 	
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
@@ -124,22 +124,147 @@
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
 	<p class="display-6" id="">Класс <span class="badge bg-secondary">MIDlet</span> и его возможности</p>
-	<p></p>
+	<p>
+		<b>Основные методы класса MIDlet:</b>
+		<table class="table table-sm table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Метод</th>
+					<th scope="col">Назначение</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td><code class="language-java">startApp()</code></td>
+					<td>Запуск приложения.</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td><code class="language-java">pauseApp()</code></td>
+					<td>Приостановка работы.</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td><code class="language-java">destroyApp(boolean unconditional)</code></td>
+					<td>Завершение и освобождение ресурсов.</td>
+				</tr>
+				<tr>
+					<th scope="row">4</th>
+					<td><code class="language-java">notifyDestroyed()</code></td>
+					<td>Сообщает AMS, что MIDlet можно закрыть.</td>
+				</tr>
+				<tr>
+					<th scope="row">5</th>
+					<td><code class="language-java">notifyPaused()</code></td>
+					<td>Сообщает AMS, что MIDlet приостановлен.</td>
+				</tr>
+				<tr>
+					<th scope="row">6</th>
+					<td><code class="language-java">getAppProperty(String key)</code></td>
+					<td>Получает значение свойства из .jad или .jar.</td>
+				</tr>
+				<tr>
+					<th scope="row">7</th>
+					<td><code class="language-java">platformRequest(String url)</code></td>
+					<td>Просит систему открыть указанный URL.</td>
+				</tr>
+				<tr>
+					<th scope="row">8</th>
+					<td><code class="language-java">checkPermission(String permission)</code></td>
+					<td>Проверяет, разрешено ли выполнять конкретное действие.</td>
+				</tr>
+			</tbody>
+		</table><br>
+		<b>Пример использования служебных методов:</b>
+	</p>
+	<pre><code class="language-java">
+		protected void startApp() {
+			String vendor = getAppProperty("MIDlet-Vendor");
+			System.out.println("Разработчик приложения: " + vendor);
+		}
+
+		protected void destroyApp(boolean unconditional) {
+			notifyDestroyed(); // сообщает системе о завершении
+		}
+	</code></pre>
 	
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
 	<p class="display-6" id="">Класс Display</p>
-	<p></p>
+	<p>
+		<span class="badge bg-secondary">Display</span> — это “менеджер экранов”. Он управляет тем, что видит пользователь.<br><br>
+		Получить текущий объект <span class="badge bg-secondary">Display</span> можно так:
+	</p>
+	<pre><code class="language-java">
+		Display display = Display.getDisplay(this);
+	</code></pre>
+	<p>
+		Затем можно переключать текущие экраны (Form, TextBox, List и т.п.):
+	</p>
+	<pre><code class="language-java">
+		display.setCurrent(form);
+	</code></pre>
 	
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
 	<p class="display-6" id="">Класс <span class="badge bg-secondary">Form</span> — базовый экран приложения</p>
-	<p></p>
+	<p>
+		<span class="badge bg-secondary">Form</span> — контейнер для элементов интерфейса: текста, полей ввода, списков и т.д.
+		<br><br>
+		Пример:
+	</p>
+	<pre><code class="language-java">
+		import javax.microedition.lcdui.*;
+		import javax.microedition.midlet.MIDlet;
+
+		public class FormExample extends MIDlet {
+			private Display display;
+			private Form form;
+
+			public FormExample() {
+				display = Display.getDisplay(this);
+				form = new Form("Информация");
+
+				form.append("Это текст на форме.\n");
+				form.append(new StringItem("Автор:", "Иванов И.И."));
+				form.append(new TextField("Введите имя:", "", 20, TextField.ANY));
+			}
+
+			protected void startApp() {
+				display.setCurrent(form);
+			}
+
+			protected void pauseApp() {}
+			protected void destroyApp(boolean unconditional) {}
+		}
+	</code></pre>
 	
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
 	<p class="display-6" id="">Команды (<span class="badge bg-secondary">Command</span>) и обработка событий (<span class="badge bg-secondary">CommandListener</span>)</p>
-	<p></p>
+	<p>
+		MIDP не имеет обычных кнопок, поэтому используется механизм Command.
+		<br><br>
+		Пример:
+	</p>
+	<pre><code class="language-java">
+		Command exitCmd = new Command("Выход", Command.EXIT, 1);
+		form.addCommand(exitCmd);
+		form.setCommandListener(this);
+	</code></pre>
+	<p>
+		Теперь, чтобы реагировать на нажатие, нужно реализовать интерфейс <span class="badge bg-secondary">CommandListener</span>:
+	</p>
+	<pre><code class="language-java">
+		public void commandAction(Command c, Displayable d) {
+			if (c == exitCmd) {
+				destroyApp(false);
+				notifyDestroyed();
+			}
+		}
+	</code></pre>
 	
 	<div class="m-0 border-0" style="padding-bottom: 20px;"><hr></div>
 	
